@@ -19,10 +19,10 @@
     <meta name="description" content="A list of the web dev trainers at Okademy USA">
 
     <!-- This is the small icon that shows up in the browser tab -->
-    <link rel="shortcut icon" href="/images/icon.png">
+    <link rel="shortcut icon" href="./images/icon.png">
 
     <!-- Styling for this site -->
-    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="./css/styles.css">
   </head>
 
   <!-- This class is removed if the user has JavaScript enabled -->
@@ -71,53 +71,7 @@
       </section>
       <nav class="links">
         <h1>Intro to Web Dev Training Team</h1>
-        <!-- Update <a href=""> to point to your accounts -->
-        <!-- Update <span> to your name -->
-        <a href="https://www.linkedin.com/in/junior-jean-simon/">
-          <strong>
-            <img style="height: fit-content; width: 60%;" src="./images/junior.jpg" alt="Josh">
-          </strong>
-          <span>
-            Junior J. Simon<br>
-            junior.simon@okademyusa.com
-          </span>
-        </a>
-        <a href="https://www.linkedin.com/in/joshuaessert/">
-          <strong>
-            <img style="height: fit-content; width: 60%;" src="./images/josh.jpeg" alt="Josh">
-          </strong>
-          <span>
-            Josh Essert<br>
-            josh.essert@okademyusa.com
-          </span>
-        </a>
-        <a href="https://www.linkedin.com/in/francis-egbujor/">
-          <strong>
-            <img style="height: fit-content; width: 60%;" src="./images/francis.jpg" alt="Francis">
-          </strong>
-          <span>
-            Francis Egbujor<br>
-            francisegbujor@yahoo.com
-          </span>
-        </a>
-        <a href="https://www.linkedin.com/in/widner-jean-simon-68472b16a/">
-          <strong>
-            <img style="height: fit-content; width: 60%;" src="./images/widner.jpg" alt="Widner">
-          </strong>
-          <span>
-            Widner J. Simon<br>
-            jeansimonwidner@gmail.com
-          </span>
-        </a>
-        <a href="https://www.linkedin.com/in/yannmjl/">
-          <strong>
-            <img style="height: fit-content; width: 60%;" src="./images/yann.jpg" alt="Yann">
-          </strong>
-          <span>
-            Yann Mulonda <br>
-            yann.mulonda@okademyusa.com
-          </span>
-        </a>
+        <!-- Dynamic content will be inserted here -->
       </nav>
     </main>
 
@@ -146,6 +100,33 @@
     </div>
 
     <!-- Dark mode button functionality -->
-    <script src="/js/dark-mode.js"></script>
+    <script src="./js/dark-mode.js"></script>
+    <!-- Script to fetch and display people -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+        fetch('http://localhost:3000/peopleList')
+          .then(response => response.json())
+          .then(data => {
+            const container = document.querySelector('.links');
+            container.innerHTML = '<h1>Full Stack Developement Training Spring 2024</h1>'; // Reset the container
+
+            data.forEach(person => {
+              const personElement = document.createElement('a');
+              personElement.href = person.LinkedIn;
+              personElement.innerHTML = `
+                <strong>
+                  <img style="height: fit-content; width: 60%;" src="./images/${person.FirstName.toLowerCase()}.jpg" alt="${person.FirstName}">
+                </strong>
+                <span>
+                  ${person.FirstName} ${person.LastName} <br>
+                  ${person.FirstName.toLowerCase()}@okademyusa.com
+                </span>
+              `;
+              container.appendChild(personElement);
+            });
+          })
+          .catch(error => console.error('Error fetching people:', error));
+      });
+    </script>
   </body>
 </html>
