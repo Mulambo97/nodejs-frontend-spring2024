@@ -102,14 +102,21 @@
       </section>
     </div>
 
+    <footer>
+      <div style="text-align: center;">
+        <!-- Button to toggle months list -->
+        <button id="toggleMonths" onclick="toggleMonths()">Months</button>
+        <ul id="months-list"></ul> <!-- Placeholder for month names -->
+      </div>
+    </footer>
+
     <!-- Dark mode button functionality -->
     <script src="./js/dark-mode.js"></script>
     <!-- Script to fetch and display people -->
-    <script src="./js/dark-mode.js"></script>
     <script>
       async function fetchPeople() {
         try {
-          const response = await fetch('http://localhost:8080/peopleList');
+          const response = await fetch('https://v5gcsavmfp.us-east-2.awsapprunner.com/peopleList');
           if (!response.ok) {
             throw new Error('Network response was not ok ' + response.statusText);
           }
@@ -157,6 +164,40 @@
         }
       }
       document.addEventListener('DOMContentLoaded', fetchPeople);
+    </script>
+    <!-- Script to fetch and display months -->
+    <script>
+      async function fetchMonths() {
+        try {
+          const response = await fetch('https://v5gcsavmfp.us-east-2.awsapprunner.com/months');
+          if (!response.ok) {
+            throw new Error('Network response was not ok ' + response.statusText);
+          }
+          const data = await response.json();
+          console.log('Months fetched successfully:', data);
+
+          const monthsList = document.getElementById('months-list');
+          for (const key in data) {
+            const monthName = data[key];
+            const listItem = document.createElement('li');
+            listItem.textContent = monthName;
+            monthsList.appendChild(listItem);
+          }
+        } catch (error) {
+          console.error('Error fetching month names:', error);
+        }
+      }
+
+      let monthsFetched = false;
+
+      function toggleMonths() {
+        const monthsList = document.getElementById('months-list');
+        if (!monthsFetched) {
+          fetchMonths();
+          monthsFetched = true;
+        }
+        monthsList.classList.toggle('hidden');
+      }
     </script>
   </body>
 </html>

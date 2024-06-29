@@ -270,3 +270,6 @@ main {
   background-color: var(--background-alt);
 }
 
+.hidden {
+  display: none;
+}
