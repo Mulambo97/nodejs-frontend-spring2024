@@ -195,7 +195,7 @@ main {
   flex: 2;
 }
 
-.links > a {
+.links > div > a {
   padding-right: var(--body-padding);
   position: relative;
   overflow: hidden;
@@ -208,7 +208,7 @@ main {
   color: var(--text-color);
 }
 
-.links > a > strong {
+.links > div > a > strong {
   padding-left: var(--body-padding);
   padding-right: .5em;
   position: relative;
@@ -218,7 +218,7 @@ main {
   z-index: 1;
 }
 
-.links > a > strong:after {
+.links > div > a > strong:after {
   content: '';
   width: 1px;
   height: 100%;
@@ -232,17 +232,17 @@ main {
 }
 
 @media screen and (min-width: 800px) {
-  .links > a > strong:after {
+  .links > div > a > strong:after {
     height: 80%;
   }
 }
 
-.links > a:hover > strong:after,
-.links > a:focus > strong:after {
+.links > div > a:hover > strong:after,
+.links > div > a:focus > strong:after {
   opacity: .5;
 }
 
-.links > a > span {
+.links > div > a > span {
   position: relative;
   font-size: clamp(1rem, 2vw, 2rem);
   transition: transform 150ms ease-in-out;
@@ -251,21 +251,22 @@ main {
 }
 
 @media (prefers-reduced-motion) {
-  .links > a > span {
+  .links > div > a > span {
     transition: none;
   }
 }
 
-.links > a:hover > span,
-.links > a:focus > span  {
+.links > div > a:hover > span,
+.links > div > a:focus > span  {
   transform: translateX(1em);
 }
 
-.links > a:focus {
+.links > div > a:focus {
   outline: none;
 }
 
-.links > a:focus,
-.links > a:focus > strong {
+.links > div > a:focus,
+.links > div > a:focus > strong {
   background-color: var(--background-alt);
 }
+
